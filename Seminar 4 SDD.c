@@ -72,7 +72,7 @@ void adaugaMasinaInLista(struct Nod** lista, Masina masinaNoua) {
 void afisareListaMasini(Nod* cap) {
 	//afiseaza toate elemente de tip masina din lista simplu inlantuita
 	//prin apelarea functiei afisareMasina()
-	while (cap->next != NULL) {
+    while (cap != NULL) {
 		afisareMasina(cap->info);
 		cap = cap->next;
 	}
