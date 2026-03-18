@@ -126,6 +126,7 @@
     <ClCompile Include="Seminar 1 SDD.c" />
     <ClCompile Include="Seminar 2 SDD.c" />
     <ClCompile Include="Seminar 3 SDD.c" />
+    <ClCompile Include="Seminar 4 SDD.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="masini.txt" />

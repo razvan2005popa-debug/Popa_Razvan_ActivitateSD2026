@@ -53,11 +53,11 @@ void afisareMasina(Masina masina) {
 	printf("Serie: %c\n\n", masina.serie);
 }
 
-void adaugaMasinaInLista(Nod** lista, Masina masinaNoua) {
-	Nod* nou = malloc(siezeof(Nod));
+void adaugaMasinaInLista(struct Nod** lista, Masina masinaNoua) {
+	Nod* nou = malloc(sizeof(Nod));
 	nou->info = masinaNoua; //shallow copy
 	nou->next = NULL;
-	Not* aux = *lista;
+	Nod* aux = *lista;
 	if ((*lista) != NULL) {
 		while (aux->next != NULL) {
 			aux = aux->next;
