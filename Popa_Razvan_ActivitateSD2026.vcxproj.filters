@@ -39,6 +39,27 @@
     <ClCompile Include="Seminar 8 SDD.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Recapitulare 1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Recapitulare 2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Recapitulare 3 Fisiere.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Recapitulare 4 LSI.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Recapitulare 5.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Recapitulare 6.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Recuperare 7.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="masini.txt">

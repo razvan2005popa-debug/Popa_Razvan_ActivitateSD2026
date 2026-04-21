@@ -123,6 +123,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Recapitulare 1.c" />
+    <ClCompile Include="Recapitulare 2.c" />
+    <ClCompile Include="Recapitulare 3 Fisiere.c" />
+    <ClCompile Include="Recapitulare 4 LSI.c" />
+    <ClCompile Include="Recapitulare 5.c" />
+    <ClCompile Include="Recapitulare 6.c" />
+    <ClCompile Include="Recuperare 7.c" />
     <ClCompile Include="Seminar 1 SDD.c" />
     <ClCompile Include="Seminar 2 SDD.c" />
     <ClCompile Include="Seminar 3 SDD.c" />
