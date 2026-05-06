@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Seminar 1 SDD.c" />
+    <ClCompile Include="Seminar 10 SDD.c" />
     <ClCompile Include="Seminar 2 SDD.c" />
     <ClCompile Include="Seminar 3 SDD.c" />
     <ClCompile Include="Seminar 4 SDD.c" />
@@ -131,9 +132,11 @@
     <ClCompile Include="Seminar 6 SDD.c" />
     <ClCompile Include="Seminar 7 SDD.c" />
     <ClCompile Include="Seminar 8 SDD.c" />
+    <ClCompile Include="Seminar 9 SDD.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="masini.txt" />
+    <Text Include="masiniArbore.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -39,9 +39,18 @@
     <ClCompile Include="Seminar 8 SDD.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Seminar 9 SDD.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Seminar 10 SDD.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="masini.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="masiniArbore.txt">
       <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>
