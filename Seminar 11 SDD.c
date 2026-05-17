@@ -1,0 +1,182 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+//trebuie sa folositi fisierul masini.txt
+//sau va creati un alt fisier cu alte date
+
+struct StructuraMasina {
+	int id;
+	int nrUsi;
+	float pret;
+	char* model;
+	char* numeSofer;
+	unsigned char serie;
+};
+typedef struct StructuraMasina Masina;
+
+Masina citireMasinaDinFisier(FILE* file) {
+	char buffer[100];
+	char sep[3] = ",\n";
+	fgets(buffer, 100, file);
+	char* aux;
+	Masina m1;
+	aux = strtok(buffer, sep);
+	m1.id = atoi(aux);
+	m1.nrUsi = atoi(strtok(NULL, sep));
+	m1.pret = atof(strtok(NULL, sep));
+	aux = strtok(NULL, sep);
+	m1.model = malloc(strlen(aux) + 1);
+	strcpy_s(m1.model, strlen(aux) + 1, aux);
+
+	aux = strtok(NULL, sep);
+	m1.numeSofer = malloc(strlen(aux) + 1);
+	strcpy_s(m1.numeSofer, strlen(aux) + 1, aux);
+
+	m1.serie = *strtok(NULL, sep);
+	return m1;
+}
+
+void afisareMasina(Masina masina) {
+	printf("Id: %d\n", masina.id);
+	printf("Nr. usi : %d\n", masina.nrUsi);
+	printf("Pret: %.2f\n", masina.pret);
+	printf("Model: %s\n", masina.model);
+	printf("Nume sofer: %s\n", masina.numeSofer);
+	printf("Serie: %c\n\n", masina.serie);
+}
+
+//1. 
+// structuri necesare
+//dorim stocarea unui graf intr-o lista de liste
+//astfel avem nod ListaPrincipala si NodListaSecundara
+
+typedef struct Nod Nod;
+struct Nod {
+	struct NodListaSecundara* vecini;
+	struct Nod* next;
+	Masina info;
+};
+
+typedef struct NodListaSecundara NodListaSecundara;
+struct NodListaSecundara {
+	struct Nod* info;
+	NodListaSecundara* next;
+};
+
+
+//2.
+//functii de inserare in liste
+//si in principala si in secundara
+
+void inserareNodInListaPrincipala(Nod** listaPrincipala, Masina masina) {
+	Nod* nou = (Nod*)malloc(sizeof(Nod));
+	nou->next = NULL;
+	nou->vecini = NULL;
+	nou->info = masina;
+
+	if (*listaPrincipala) {
+		Nod* aux = *listaPrincipala;
+		while (aux->next) {
+			aux = aux->next;
+		}
+		aux->next = nou;
+	}
+	else
+	*listaPrincipala = nou;
+}
+
+void inserareNodInListaSecundara(NodListaSecundara** listaSecundara, Nod* nod) {
+	NodListaSecundara* nou = (NodListaSecundara*)malloc(sizeof(NodListaSecundara));
+	nou->next = NULL;
+	nou->info = nod;
+	if (*listaSecundara) {
+		NodListaSecundara* aux = *listaSecundara;
+		while (aux->next) {
+			aux = aux->next;
+		}
+		aux->next = nou;
+	}
+	else
+		*listaSecundara = nou;
+
+}
+
+//3.
+//functie de cautarea in lista principala dupa ID
+Nod* cautaNodDupaID(Nod* listaPrincipala, int id) {
+		Nod* aux = listaPrincipala;
+	while (aux) {
+		if (aux->info.id == id) {
+			return aux;
+		}
+		aux = aux->next;
+	}
+	return NULL;
+}
+
+//4.
+//inserare muchie
+void inserareMuchie(Nod* listaPrincipala, int idStart, int idStop) {
+	Nod* nodStart=cautaNodDupaID(listaPrincipala, idStart);
+	Nod* nodStop=cautaNodDupaID(listaPrincipala, idStop);
+	if (nodStart && nodStop) {
+		inserareNodInListaSecundara(&nodStart->vecini, nodStop);
+		inserareNodInListaSecundara(&nodStop->vecini, nodStart);
+	}
+	else
+		printf("Nu s-au gasit nodurile pentru muchia data\n");
+
+}
+
+
+void* citireNoduriMasiniDinFisier(const char* numeFisier) {
+	//functia primeste numele fisierului, il deschide si citeste toate masinile din fisier
+	//prin apelul repetat al functiei citireMasinaDinFisier()
+	//ATENTIE - la final inchidem fisierul/stream-ul
+	FILE* f = fopen(numeFisier, "r");
+	Nod* listaPrincipala = NULL;
+	while(!feof(f)) {
+		Masina masina = citireMasinaDinFisier(f);
+		inserareNodInListaPrincipala(&listaPrincipala, masina);
+	}
+	fclose(f);
+	return listaPrincipala;
+}
+
+void citireMuchiiDinFisier(Nod* graf,const char* numeFisier) {
+	//functia primeste numele fisierului, il deschide si citeste 
+	//toate id-urile de start si stop pentru fiecare muchie
+	//ATENTIE - la final inchidem fisierul/stream-ul
+	FILE* f = fopen(numeFisier, "r");
+	while(!feof(f)) {
+		int idStart, idStop;
+		fscanf(f, "%d %d\n", &idStart, &idStop);
+		inserareMuchie(graf, idStart, idStop);
+	}
+	fclose(f);
+}
+
+void dezalocareNoduriGraf(void* listaPrincipala) {
+	//sunt dezalocate toate masinile din graf 
+	//si toate nodurile celor doua liste
+}
+
+void afiseazaListaSecundara(Nod* graf, int id) {
+	Nod* nod = cautaNodDupaID(graf, id);
+	NodListaSecundara* aux = nod->vecini;
+	while (aux) {
+		afisareMasina(aux->info->info);
+		aux = aux->next;
+	}
+}
+
+int main() {
+	Nod* graf = citireNoduriMasiniDinFisier("masini.txt");
+	citireMuchiiDinFisier(graf, "muchii.txt");
+	afiseazaListaSecundara(graf, 3);
+	
+
+	return 0;
+}

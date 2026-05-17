@@ -132,6 +132,7 @@
     <ClCompile Include="Recuperare 7.c" />
     <ClCompile Include="Seminar 1 SDD.c" />
     <ClCompile Include="Seminar 10 SDD.c" />
+    <ClCompile Include="Seminar 11 SDD.c" />
     <ClCompile Include="Seminar 2 SDD.c" />
     <ClCompile Include="Seminar 3 SDD.c" />
     <ClCompile Include="Seminar 4 SDD.c" />
@@ -144,6 +145,7 @@
   <ItemGroup>
     <Text Include="masini.txt" />
     <Text Include="masiniArbore.txt" />
+    <Text Include="muchii.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
